@@ -1,4 +1,6 @@
 # PHP JSON Schema Validator
 
-
-READ THE CODE!!1
+### Setup
+- Copy ".env.example" to ".env"
+- Change UID to host UID
+- Copy "docker-compose.override.yml.example" to "docker-compose.override.yml"

@@ -6,4 +6,3 @@
 .phpunit.result.cache
 docker-compose.override.yaml
 docker-compose.override.yml
-.vscode

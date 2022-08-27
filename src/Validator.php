@@ -18,10 +18,11 @@ final class Validator implements ValidatorInterface
         $this->parser = new Parser();
         $this->validator = Validation::createValidatorBuilder()->getValidator();
     }
-       
+
     public function validate(array $payload, array $schema): ConstraintViolationListInterface
     {
         $constraints = $this->parser->parse($schema);
+
         return $this->validator->validate($payload, $constraints);
     }
 }

@@ -1,0 +1,30 @@
+{
+    "terminal.integrated.scrollback": 100000,
+    "editor.wordSeparators": "`~!@#%^&*()-=+[{]}\\|;:'\",.<>/?",
+    "phpunit.phpunit": "/project/code/bin/phpunit",
+    "php.suggest.basic": false,
+    "editor.quickSuggestions": {
+        "comments": true
+    },
+    "intelephense.files.exclude": [
+        "**/.git/**",
+        "**/.svn/**",
+        "**/.hg/**",
+        "**/CVS/**",
+        "**/.DS_Store/**",
+        "**/node_modules/**",
+        "**/bower_components/**",
+        "**/vendor/**/{Test,test,Tests,tests}/**/*Test.php"
+    ],
+    "[php]": {
+        "editor.defaultFormatter": "junstyle.php-cs-fixer",
+        "editor.formatOnSave": true
+    },
+    "intelephense.phpdoc.useFullyQualifiedNames": true,
+    "git.ignoreLimitWarning": true,
+    "php-cs-fixer.executablePath": "/project/code/vendor/bin/php-cs-fixer",
+    "php-cs-fixer.config": "/project/code/.php_cs.dist.php",
+    "php-cs-fixer.rules": "@PSR2",
+    "php-cs-fixer.onsave": true,
+    "terminal.integrated.fontSize": 16
+}

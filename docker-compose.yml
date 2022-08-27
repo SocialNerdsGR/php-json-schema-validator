@@ -5,9 +5,8 @@ services:
     build:
       context: ./.docker
       args:
-        GID: 1000
-        UID: 1000
-    container_name: oa-validator
+        UID: $UID
+    container_name: json-validator
     volumes:
-      - ./:/var/www/html
+      - ./:/project/code
     tty: true

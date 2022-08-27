@@ -20,14 +20,16 @@
             "type": "object",
             "properties": {
                 "email": {
-                    "$ref": "email"
+                    "type": "string"
                 },
                 "id": {
                     "type": "integer",
                     "default": 0
                 }
             },
-            "required": ["id"]
+            "required": [
+                "id"
+            ]
         },
         "uuid": {
             "type": "string",
@@ -40,7 +42,10 @@
         },
         "color": {
             "type": "string",
-            "enum": ["red", "blue"]
+            "enum": [
+                "red",
+                "blue"
+            ]
         },
         "price": {
             "type": "number",

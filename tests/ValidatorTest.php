@@ -10,7 +10,7 @@ class ValidatorTest extends TestCase
 {
     public function test()
     {
-        $file = file_get_contents('/var/www/html/tests/schema.json', true);
+        $file = file_get_contents('/project/code/tests/schema.json', true);
 
         $schema = json_decode($file, true);
         $validator = new Validator();
@@ -21,10 +21,10 @@ class ValidatorTest extends TestCase
             'price' => 100.0,
             'email' => 'nick@gmail.com',
             'uuid' => 'c94b88aa-9910-47b1-bb66-75365d7ff0a9',
-            "color" => "red",
-            "person" => [
-                "email" => "ggg"
-            ]
+            'color' => 'red',
+            'person' => [
+                'email' => 'ggg',
+            ],
         ], $schema);
         foreach ($r as $violation) {
             var_dump($violation->getMessage(), $violation->getPropertyPath());
