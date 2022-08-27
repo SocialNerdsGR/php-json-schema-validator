@@ -1,0 +1,34 @@
+{
+  "name": "socialnerds/open-api-validator",
+  "description": "Validate payload based on an JsonSchema specification file.",
+  "type": "library",
+  "require": {
+    "php": "^8.1",
+    "symfony/validator": "^6.1"
+  },
+  "require-dev": {
+    "phpunit/phpunit": "^9.5",
+    "phpstan/phpstan": "^1.8",
+    "friendsofphp/php-cs-fixer": "^3.10"
+  },
+  "license": "MIT",
+  "autoload": {
+    "psr-4": {
+      "SocialNerds\\JsonSchemaValidator\\": "src/"
+    }
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "SocialNerds\\JsonSchemaValidator\\": "tests/"
+    }
+  },
+  "authors": [
+    {
+      "name": "Thanos Korakas",
+      "email": "thanoskorakas@gmail.com"
+    }
+  ],
+  "scripts": {
+    "test": "./vendor/bin/phpunit"
+  }
+}

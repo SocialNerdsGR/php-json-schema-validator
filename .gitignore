@@ -1,0 +1,9 @@
+/vendor
+/build
+.env
+.DS_Store
+.idea/
+.phpunit.result.cache
+docker-compose.override.yaml
+docker-compose.override.yml
+.vscode

@@ -1,0 +1,61 @@
+{
+    "properties": {
+        "checked": {
+            "type": "boolean",
+            "default": false
+        },
+        "id": {
+            "type": "integer",
+            "default": 0
+        },
+        "email": {
+            "type": "string",
+            "format": "email",
+            "messages": {
+                "format": "This format is not valid",
+                "type": "Only string is supported"
+            }
+        },
+        "person": {
+            "type": "object",
+            "properties": {
+                "email": {
+                    "$ref": "email"
+                },
+                "id": {
+                    "type": "integer",
+                    "default": 0
+                }
+            },
+            "required": ["id"]
+        },
+        "uuid": {
+            "type": "string",
+            "format": "uuid"
+        },
+        "name": {
+            "type": "string",
+            "default": "",
+            "minLength": "20"
+        },
+        "color": {
+            "type": "string",
+            "enum": ["red", "blue"]
+        },
+        "price": {
+            "type": "number",
+            "default": 0.0
+        }
+    },
+    "$references": {
+        "email": {}
+    },
+    "required": [
+        "checked",
+        "dimensions",
+        "id",
+        "name",
+        "price",
+        "tags"
+    ]
+}

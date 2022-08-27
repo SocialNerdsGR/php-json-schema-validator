@@ -1,0 +1,13 @@
+version: "3.9"
+
+services:
+  fpm:
+    build:
+      context: ./.docker
+      args:
+        GID: 1000
+        UID: 1000
+    container_name: oa-validator
+    volumes:
+      - ./:/var/www/html
+    tty: true
