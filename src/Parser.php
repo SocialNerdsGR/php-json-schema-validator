@@ -23,10 +23,6 @@ final class Parser
 
     public function parse(array $schema): Assert\Collection
     {
-        if (empty($schema['properties'])) {
-            throw new InvalidArgumentException('Invalid JSON Schema. Should provide some properties');
-        }
-
         foreach ($schema['properties'] as $key => $field) {
             $this->apply($key, $field);
         }

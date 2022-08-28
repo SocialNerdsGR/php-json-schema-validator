@@ -16,13 +16,34 @@ final class ArrayConstraint implements ConstraintInterface
 
     public function apply(array $field): array
     {
-        $parser = new Parser();
-        $itemsConstraints = $parser->parse($field['items'] ?? []);
+        $constaints = [];
+
+        if (isset($field['$anyOf'])) {
+            $constaints = [
+                new Assert\AtLeastOneOf($this->handleMultiple($field['$anyOf'])),
+            ];
+        }
+
+        if (isset($field['items'])) {
+            $parser = new Parser();
+            $constaints = $parser->parse($field['items'] ?? []);
+        }
 
         return [
-            new Assert\All([
-                $itemsConstraints,
-            ]),
+            new Assert\All(
+                ['constraints' => $constaints]
+            ),
         ];
+    }
+
+    private function handleMultiple(array $items): array
+    {
+        $constraints = [];
+        foreach ($items as $item) {
+            $parser = new Parser();
+            $constraints[] = $parser->parse($item);
+        }
+
+        return $constraints;
     }
 }

@@ -51,35 +51,53 @@
             "items": {
                 "type": "object",
                 "properties": {
-                    "email": {
+                    "type": {
                         "type": "string",
-                        "format": "email"
+                        "enum": ["a", "b", "c"]
+                    },
+                    "children": {
+                        "type": "array"
                     }
                 },
+                "allowAdditionalProperties": true,
                 "required": [
-                    "email"
+                    "type",
+                    "children"
                 ]
-            },
-            "otherItems": {
-                "type": "object",
-                "properties": {
-                    "name": {
-                        "type": "string"
-                    }
-                },
-                "required": [
-                    "name"
-                ]
-
             }
+        },
+        "componentsAnyOf": {
+            "type": "array",
+            "$anyOf": [
+                {
+                    "type": "object",
+                    "properties": {
+                        "email": {
+                            "type": "string",
+                            "format": "email"
+                        }
+                    },
+                    "required": [
+                        "email"
+                    ]
+                },
+                {
+                    "type": "object",
+                    "properties": {
+                        "name": {
+                            "type": "string"
+                        }
+                    },
+                    "required": [
+                        "name"
+                    ]
+                }
+            ]
         }
     },
     "$references": {
         "email": {}
     },
     "required": [
-        "checked",
-        "dimensions",
-        "id"
     ]
 }
