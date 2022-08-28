@@ -5,30 +5,20 @@ declare(strict_types=1);
 namespace SocialNerds\JsonSchemaValidator;
 
 use InvalidArgumentException;
-use SocialNerds\JsonSchemaValidator\Constraints\ArrayConstraint;
-use SocialNerds\JsonSchemaValidator\Constraints\EnumConstraint;
-use SocialNerds\JsonSchemaValidator\Constraints\FormatConstraint;
-use SocialNerds\JsonSchemaValidator\Constraints\StringConstraint;
-use SocialNerds\JsonSchemaValidator\Constraints\TypeConstraint;
+use SocialNerds\JsonSchemaValidator\Constraints\ConstraintsCollection;
 use Symfony\Component\Validator\Constraints as Assert;
 
 final class Parser
 {
-    public const CONSTRAINTS = [
-        TypeConstraint::class,
-        StringConstraint::class,
-        FormatConstraint::class,
-        EnumConstraint::class,
-        ArrayConstraint::class,
-    ];
-
     private array $collection = [];
 
     private readonly ConstaintResolver $resolver;
+    private readonly ConstraintsCollection $constraints;
 
     public function __construct()
     {
         $this->resolver = new ConstaintResolver();
+        $this->constraints = new ConstraintsCollection();
     }
 
     public function parse(array $schema): Assert\Collection
@@ -36,6 +26,7 @@ final class Parser
         if (empty($schema['properties'])) {
             throw new InvalidArgumentException('Invalid JSON Schema. Should provide some properties');
         }
+
         foreach ($schema['properties'] as $key => $field) {
             $this->apply($key, $field);
         }
@@ -57,7 +48,7 @@ final class Parser
             $this->collection[$key] = $nestedParser->parse($field);
         }
 
-        foreach (self::CONSTRAINTS as $constraintClass) {
+        foreach ($this->constraints as $constraintClass) {
             $constaint = $this->resolver->resolve($constraintClass);
             if ($constaint->isApplicable($field)) {
                 $this->collection[$key] = array_merge($this->collection[$key] ?? [], $constaint->apply($field));

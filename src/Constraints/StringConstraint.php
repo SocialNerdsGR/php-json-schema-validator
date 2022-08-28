@@ -24,6 +24,7 @@ final class StringConstraint implements ConstraintInterface
     public function apply(array $field): array
     {
         $constaints = [];
+
         foreach (self::STRING_MAP as $key => $value) {
             if (array_key_exists($key, $field)) {
                 $constaints[$value] = $field[$key];
