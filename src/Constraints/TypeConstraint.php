@@ -8,7 +8,7 @@ use Symfony\Component\Validator\Constraints as Assert;
 
 final class TypeConstraint implements ConstraintInterface
 {
-    const TYPES_MAP = [
+    private const TYPES_MAP = [
         'number' => 'numeric',
         'integer' => 'int',
         'int' => 'int',
@@ -16,10 +16,10 @@ final class TypeConstraint implements ConstraintInterface
         'double' => 'double',
         'boolean' => 'bool',
         'string' => 'string',
-        'array' => 'array'
+        'array' => 'array',
     ];
 
-    public function isSatisfied(array $field): bool
+    public function isApplicable(array $field): bool
     {
         return array_key_exists('type', $field) && array_key_exists($field['type'], self::TYPES_MAP);
     }

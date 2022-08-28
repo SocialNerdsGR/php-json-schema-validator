@@ -25,31 +25,53 @@
                 "id": {
                     "type": "integer",
                     "default": 0
+                },
+                "address": {
+                    "type": "object",
+                    "properties": {
+                        "street": {
+                            "type": "string"
+                        }
+                    },
+                    "required": [
+                        "street"
+                    ]
                 }
             },
             "required": [
                 "id"
             ]
         },
-        "uuid": {
-            "type": "string",
-            "format": "uuid"
-        },
-        "name": {
-            "type": "string",
-            "default": "",
-            "minLength": "20"
-        },
-        "color": {
-            "type": "string",
-            "enum": [
-                "red",
-                "blue"
-            ]
-        },
         "price": {
             "type": "number",
             "default": 0.0
+        },
+        "components": {
+            "type": "array",
+            "items": {
+                "type": "object",
+                "properties": {
+                    "email": {
+                        "type": "string",
+                        "format": "email"
+                    }
+                },
+                "required": [
+                    "email"
+                ]
+            },
+            "otherItems": {
+                "type": "object",
+                "properties": {
+                    "name": {
+                        "type": "string"
+                    }
+                },
+                "required": [
+                    "name"
+                ]
+
+            }
         }
     },
     "$references": {
@@ -58,9 +80,6 @@
     "required": [
         "checked",
         "dimensions",
-        "id",
-        "name",
-        "price",
-        "tags"
+        "id"
     ]
 }

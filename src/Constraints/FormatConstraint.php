@@ -8,22 +8,21 @@ use Symfony\Component\Validator\Constraints as Assert;
 
 final class FormatConstraint implements ConstraintInterface
 {
-    const FORMAT_MAP = [
-        'date' => 'date',
-        'time' => 'time',
-        'date-time' => 'date-time',
+    private const FORMAT_MAP = [
+        'date' => Assert\Date::class,
+        'time' => Assert\Time::class,
+        'date-time' => Assert\DateTime::class,
         'duration' => 'duration',
         'regex' => 'regex',
         'email' => Assert\Email::class,
-        'hostname' => 'hostname',
-        'ipv4' => 'ipv4',
-        'ipv6' => 'ipv6',
-        'uri' => 'uri',
+        'hostname' => Assert\Hostname::class,
+        'ipv4' => Assert\Ip::class,
+        'ipv6' => Assert\Ip::class,
+        'url' => Assert\Url::class,
         'uuid' => Assert\Uuid::class,
-        'json' => 'json',
     ];
 
-    public function isSatisfied(array $field): bool
+    public function isApplicable(array $field): bool
     {
         return array_key_exists('type', $field)
             && $field['type'] === 'string'
@@ -34,6 +33,7 @@ final class FormatConstraint implements ConstraintInterface
     public function apply(array $field): array
     {
         $formatter = self::FORMAT_MAP[$field['format']];
+
         return [new $formatter];
     }
 }

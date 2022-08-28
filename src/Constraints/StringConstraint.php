@@ -8,12 +8,13 @@ use Symfony\Component\Validator\Constraints as Assert;
 
 final class StringConstraint implements ConstraintInterface
 {
-    const STRING_MAP = [
+    private const STRING_MAP = [
         'minLength' => 'min',
         'maxLength' => 'min',
+        'pattern' => '',
     ];
 
-    public function isSatisfied(array $field): bool
+    public function isApplicable(array $field): bool
     {
         return array_key_exists('type', $field)
           && $field['type'] === 'string'
@@ -30,7 +31,7 @@ final class StringConstraint implements ConstraintInterface
         }
 
         return [
-          new Assert\Length($constaints)
+            new Assert\Length($constaints),
         ];
     }
 }

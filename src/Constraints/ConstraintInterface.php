@@ -6,6 +6,7 @@ namespace SocialNerds\JsonSchemaValidator\Constraints;
 
 interface ConstraintInterface
 {
-    public function isSatisfied(array $field): bool;
+    public function isApplicable(array $field): bool;
+
     public function apply(array $field): array;
 }

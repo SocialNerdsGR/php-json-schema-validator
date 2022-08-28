@@ -8,7 +8,7 @@ use Symfony\Component\Validator\Constraints as Assert;
 
 final class EnumConstraint implements ConstraintInterface
 {
-    public function isSatisfied(array $field): bool
+    public function isApplicable(array $field): bool
     {
         return array_key_exists('enum', $field);
     }
