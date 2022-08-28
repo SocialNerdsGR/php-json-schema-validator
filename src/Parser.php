@@ -12,12 +12,12 @@ final class Parser
 {
     private array $collection = [];
 
-    private readonly ConstaintResolver $resolver;
+    private readonly ConstraintResolver $resolver;
     private readonly ConstraintsCollection $constraints;
 
     public function __construct()
     {
-        $this->resolver = new ConstaintResolver();
+        $this->resolver = new ConstraintResolver();
         $this->constraints = new ConstraintsCollection();
     }
 

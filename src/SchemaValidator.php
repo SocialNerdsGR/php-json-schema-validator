@@ -6,7 +6,7 @@ namespace SocialNerds\JsonSchemaValidator;
 
 use Symfony\Component\Validator\ConstraintViolationListInterface;
 
-interface ValidatorInterface
+interface SchemaValidator
 {
     public function validate(array $payload, array $schema): ConstraintViolationListInterface;
 }

@@ -17,7 +17,7 @@ final class ArrayConstraint implements ConstraintInterface
     public function apply(array $field): array
     {
         $parser = new Parser();
-        $itemsConstraints = $parser->parse($field['items']);
+        $itemsConstraints = $parser->parse($field['items'] ?? []);
 
         return [
             new Assert\All([

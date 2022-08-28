@@ -13,7 +13,7 @@ class ValidatorTest extends TestCase
         $file = file_get_contents(__DIR__ . '/schema.json', true);
 
         $schema = json_decode($file, true);
-        $validator = new Validator();
+        $validator = new JsonSchemaValidator();
         $r = $validator->validate([
             'checked' => true,
             'id' => 1,

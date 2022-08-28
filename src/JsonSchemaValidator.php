@@ -6,11 +6,11 @@ namespace SocialNerds\JsonSchemaValidator;
 
 use Symfony\Component\Validator\ConstraintViolationListInterface;
 use Symfony\Component\Validator\Validation;
-use Symfony\Component\Validator\Validator\ValidatorInterface as VI;
+use Symfony\Component\Validator\Validator\ValidatorInterface;
 
-final class Validator implements ValidatorInterface
+final class JsonSchemaValidator implements SchemaValidator
 {
-    private readonly VI $validator;
+    private readonly ValidatorInterface $validator;
     private readonly Parser $parser;
 
     public function __construct()

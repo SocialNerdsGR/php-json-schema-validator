@@ -6,7 +6,7 @@ namespace SocialNerds\JsonSchemaValidator;
 
 use SocialNerds\JsonSchemaValidator\Constraints\ConstraintInterface;
 
-final class ConstaintResolver
+final class ConstraintResolver
 {
     private array $cache = [];
 
