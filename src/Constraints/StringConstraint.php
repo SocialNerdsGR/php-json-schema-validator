@@ -8,24 +8,37 @@ use Symfony\Component\Validator\Constraints as Assert;
 
 final class StringConstraint implements ConstraintInterface
 {
-    private const STRING_MAP = [
+    private const LENGTH_MAP = [
         'minLength' => 'min',
-        'maxLength' => 'min',
-        'pattern' => '',
+        'maxLength' => 'max',
     ];
 
     public function isApplicable(array $field): bool
     {
         return array_key_exists('type', $field)
-          && $field['type'] === 'string'
-          && count(array_intersect_key($field, self::STRING_MAP));
+            && $field['type'] === 'string'
+            && (count(array_intersect_key($field, self::LENGTH_MAP)) || array_key_exists('pattern', $field));
     }
 
     public function apply(array $field): array
     {
+        $constraints = [];
+        if (array_intersect_key($field, self::LENGTH_MAP)) {
+            $constraints = array_merge($constraints, $this->applyLengthConstraints($field));
+        }
+
+        if (array_key_exists('pattern', $field)) {
+            $constraints[] = new Assert\Regex($field['pattern']);
+        }
+
+        return $constraints;
+    }
+
+    private function applyLengthConstraints(array $field): array
+    {
         $constaints = [];
 
-        foreach (self::STRING_MAP as $key => $value) {
+        foreach (self::LENGTH_MAP as $key => $value) {
             if (array_key_exists($key, $field)) {
                 $constaints[$value] = $field[$key];
             }
