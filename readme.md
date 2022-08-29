@@ -1,5 +1,7 @@
 # PHP JSON Schema Validator
 
+> Work in progress...
+
 ### Setup
 - Copy ".env.example" to ".env"
 - Change UID to host UID
