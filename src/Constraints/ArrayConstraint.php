@@ -11,7 +11,7 @@ final class ArrayConstraint implements ConstraintInterface
 {
     public function isApplicable(array $field): bool
     {
-        return $field['type'] === 'array';
+        return isset($field['type']) && $field['type'] === 'array';
     }
 
     public function apply(array $field): array
