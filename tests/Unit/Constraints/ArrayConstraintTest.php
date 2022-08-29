@@ -31,7 +31,7 @@ class ArrayConstraintTest extends TestCase
         $this->assertFalse($this->constraint->isApplicable(['test' => 'string']));
     }
 
-    public function test_should_return_empty_constraints_array_no_specifications_exist(): void
+    public function test_should_return_empty_constraints_array_when_no_specifications_exist(): void
     {
         $this->assertEquals(
             [
@@ -51,5 +51,20 @@ class ArrayConstraintTest extends TestCase
             ],
             $this->constraint->apply(['items' => ['type' => 'string']])
         );
+    }
+
+    public function test_any_of(): void
+    {
+        $this->markTestIncomplete();
+    }
+
+    public function test_any_of_with_objects(): void
+    {
+        $this->markTestIncomplete();
+    }
+
+    public function test_array_of_objects(): void
+    {
+        $this->markTestIncomplete();
     }
 }

@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace SocialNerds\JsonSchemaValidator;
 
-use InvalidArgumentException;
 use SocialNerds\JsonSchemaValidator\Constraints\ConstraintsCollection;
 use Symfony\Component\Validator\Constraints as Assert;
 
@@ -21,8 +20,13 @@ final class Parser
         $this->constraints = new ConstraintsCollection();
     }
 
-    public function parse(array $schema): Assert\Collection
+    public function parse(array $schema): Assert\Collection|array
     {
+        if (!array_key_exists('properties', $schema)) {
+            $this->apply('custom_key', $schema);
+
+            return $this->collection['custom_key'];
+        }
         foreach ($schema['properties'] as $key => $field) {
             $this->apply($key, $field);
         }

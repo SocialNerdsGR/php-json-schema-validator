@@ -66,6 +66,13 @@
                 ]
             }
         },
+        "simpleArray": {
+            "type": "array",
+            "items": {
+                "type": "string",
+                "format": "email"
+            }
+        },
         "componentsAnyOf": {
             "type": "array",
             "$anyOf": [
