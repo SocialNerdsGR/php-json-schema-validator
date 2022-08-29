@@ -41,7 +41,9 @@ final class ArrayConstraint implements ConstraintInterface
         $constraints = [];
         foreach ($items as $item) {
             $parser = new Parser();
-            $constraints[] = $parser->parse($item);
+            $result = $parser->parse($item);
+
+            $constraints = array_merge($constraints, is_array($result) ? $result : [$result]);
         }
 
         return $constraints;

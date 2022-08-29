@@ -53,18 +53,99 @@ class ArrayConstraintTest extends TestCase
         );
     }
 
-    public function test_any_of(): void
+    public function test_should_parse_any_of_key(): void
     {
-        $this->markTestIncomplete();
+        $this->assertEquals(
+            [
+                new Assert\All(['constraints' => [
+                    new Assert\AtLeastOneOf(
+                        [
+                            new Assert\Type('string'),
+                            new Assert\Type('int'),
+                        ]
+                    ),
+                ]]),
+            ],
+            $this->constraint->apply(['$anyOf' => [
+                ['type' => 'string'],
+                ['type' => 'integer'],
+            ]])
+        );
     }
 
-    public function test_any_of_with_objects(): void
+    public function test_should_parse_any_of_with_objects(): void
     {
-        $this->markTestIncomplete();
+        $this->assertEquals(
+            [
+                new Assert\All(['constraints' => [
+                    new Assert\AtLeastOneOf(
+                        [
+                            new Assert\Collection([
+                                'fields' => [
+                                    'name' => new Assert\Optional([
+                                        new Assert\Type('string'),
+                                    ]),
+                                ],
+                                'allowExtraFields' => true,
+                            ]),
+                            new Assert\Collection([
+                                'fields' => [
+                                    'email' => new Assert\Optional([
+                                        new Assert\Type('string'),
+                                        new Assert\Email(),
+                                    ]),
+                                ],
+                                'allowExtraFields' => true,
+                            ]),
+                        ]
+                    ),
+                ]]),
+            ],
+            $this->constraint->apply(['$anyOf' => [
+                [
+                    'type' => 'object',
+                    'properties' => [
+                        'name' => [
+                            'type' => 'string',
+                        ],
+                    ],
+                ],
+                [
+                    'type' => 'object',
+                    'properties' => [
+                        'email' => [
+                            'type' => 'string',
+                            'format' => 'email',
+                        ],
+                    ],
+                ],
+            ]])
+        );
     }
 
     public function test_array_of_objects(): void
     {
-        $this->markTestIncomplete();
+        $this->assertEquals(
+            [
+                new Assert\All(['constraints' => [
+                    new Assert\Collection([
+                        'fields' => [
+                            'name' => new Assert\Optional([
+                                new Assert\Type('string'),
+                            ]),
+                        ],
+                        'allowExtraFields' => true,
+                    ]),
+                ]]),
+            ],
+            $this->constraint->apply(['items' => [
+                'type' => 'object',
+                'properties' => [
+                    'name' => [
+                        'type' => 'string',
+                    ],
+                ],
+            ], ])
+        );
     }
 }
