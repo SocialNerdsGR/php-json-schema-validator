@@ -24,17 +24,17 @@ final class StringConstraint implements ConstraintInterface
     {
         $constraints = [];
         if (array_intersect_key($field, self::LENGTH_MAP)) {
-            $constraints = array_merge($constraints, $this->applyLengthConstraints($field));
+            $constraints[] = $this->applyLengthConstraints($field);
         }
 
-        if (array_key_exists('pattern', $field)) {
+        if (array_key_exists('pattern', $field) && @preg_match($field['pattern'], '') !== false) {
             $constraints[] = new Assert\Regex($field['pattern']);
         }
 
         return $constraints;
     }
 
-    private function applyLengthConstraints(array $field): array
+    private function applyLengthConstraints(array $field): Assert\Length
     {
         $constaints = [];
 
@@ -44,8 +44,6 @@ final class StringConstraint implements ConstraintInterface
             }
         }
 
-        return [
-            new Assert\Length($constaints),
-        ];
+        return new Assert\Length($constaints);
     }
 }

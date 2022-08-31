@@ -54,4 +54,30 @@ class StringConstraintsTest extends TestCase
              'pattern' => 'test',
          ]));
      }
+
+     public function test_should_apply_length_constraints(): void
+     {
+         $this->assertEquals([new Assert\Length(['min' => 1, 'max' => 10])], $this->constraint->apply(['minLength' => 1, 'maxLength' => 10]));
+     }
+
+     public function test_should_apply_pattern_constraints(): void
+     {
+         $this->assertEquals([new Assert\Regex('/name/')], $this->constraint->apply(['pattern' => '/name/']));
+     }
+
+    public function test_should_not_apply_invalid_pattern(): void
+    {
+        $this->assertEquals([], $this->constraint->apply(['pattern' => '\\']));
+    }
+
+     public function test_should_apply_all_constraints(): void
+     {
+         $this->assertEquals(
+             [
+                 new Assert\Length(['min' => 1, 'max' => 10]),
+                 new Assert\Regex('/[a-z]/'),
+             ],
+             $this->constraint->apply(['pattern' => '/[a-z]/', 'minLength' => 1, 'maxLength' => 10])
+         );
+     }
 }
